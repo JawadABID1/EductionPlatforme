@@ -8,6 +8,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface CourseFileMapper {
     CourseFileDto toDto(CourseFile courseFile);
-    CourseFile toEntity(CourseDto courseDto);
+//    CourseFile toEntity(CourseDto courseDto);
 
 }
