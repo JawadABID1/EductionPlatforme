@@ -1,6 +1,6 @@
 package ma.abid.eductionPlatform.services.role;
 
-import ma.abid.eductionPlatform.dto.RoleDto;
+import ma.abid.eductionPlatform.dto.role.RoleDto;
 import ma.abid.eductionPlatform.exception.DuplicateResourceException;
 import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
 

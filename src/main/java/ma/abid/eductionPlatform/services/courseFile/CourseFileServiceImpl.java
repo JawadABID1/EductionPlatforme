@@ -1,15 +1,19 @@
 package ma.abid.eductionPlatform.services.courseFile;
 
 import lombok.RequiredArgsConstructor;
-import ma.abid.eductionPlatform.dto.CourseFileDto;
-import ma.abid.eductionPlatform.entities.*;
+import ma.abid.eductionPlatform.dto.courseFile.CourseFileDownloadResponse;
+import ma.abid.eductionPlatform.dto.courseFile.CourseFileDto;
+import ma.abid.eductionPlatform.entities.course.Course;
+import ma.abid.eductionPlatform.entities.courseFile.CourseFile;
 import ma.abid.eductionPlatform.exception.DuplicateResourceException;
 import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
-import ma.abid.eductionPlatform.mapper.CourseFileMapper;
+import ma.abid.eductionPlatform.mapper.courseFile.CourseFileMapper;
 import ma.abid.eductionPlatform.repository.CourseFileRepository;
 import ma.abid.eductionPlatform.repository.CourseRepository;
-import ma.abid.eductionPlatform.services.courseFile.uploadStrategy.Strategy;
-import ma.abid.eductionPlatform.services.courseFile.uploadStrategy.StrategyFactory;
+import ma.abid.eductionPlatform.services.courseFile.downloadStrategy.DownloadStrategy;
+import ma.abid.eductionPlatform.services.courseFile.downloadStrategy.DownloadStrategyFactory;
+import ma.abid.eductionPlatform.services.courseFile.uploadStrategy.UploadStrategy;
+import ma.abid.eductionPlatform.services.courseFile.uploadStrategy.UploadStrategyFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +32,8 @@ public class CourseFileServiceImpl implements CourseFileService {
     private final CourseFileRepository courseFileRepository;
     private final CourseFileMapper courseFileMapper;
     private final CourseRepository courseRepository;
-    private final StrategyFactory strategyFactory;
+    private final UploadStrategyFactory uploadStrategyFactory;
+    private final DownloadStrategyFactory downloadStrategyFactory;
 
     private static final String UPLOAD_DIR = "uploads/";
 
@@ -51,7 +56,7 @@ public class CourseFileServiceImpl implements CourseFileService {
             throw new RuntimeException("Failed to save file: " + e.getMessage(), e);
         }
 
-        Strategy strategy = strategyFactory.getStrategy(extension);
+        UploadStrategy strategy = uploadStrategyFactory.getStrategy(extension);
         CourseFile fileType = strategy.treatFileType(originalFilename, course, path);
         courseFileRepository.save(fileType);
         return courseFileMapper.toDto(fileType);
@@ -73,13 +78,20 @@ public class CourseFileServiceImpl implements CourseFileService {
     }
 
     @Override
-    public byte[] downloadFile(Long fileId) {
+    public CourseFileDownloadResponse downloadFile(Long fileId) {
         CourseFile file = courseFileRepository.findById(fileId)
                 .orElseThrow(() -> new ResourceNotFoundException("File not found"));
 
         Path path = Paths.get(file.getFilePath());
         try {
-            return Files.readAllBytes(path);
+            byte[] fileBytes =  Files.readAllBytes(path);
+            DownloadStrategy downloadStrategy = downloadStrategyFactory.getStrategy(getFileExtension(file.getFileName()));
+            String contentType = downloadStrategy.getContentType(getFileExtension(file.getFileName()));
+            return CourseFileDownloadResponse.builder()
+                    .fileBytes(fileBytes)
+                    .contentType(contentType)
+                    .fileName(file.getFileName())
+                    .build();
         } catch (IOException e) {
             throw new RuntimeException("Failed to read file", e);
         }

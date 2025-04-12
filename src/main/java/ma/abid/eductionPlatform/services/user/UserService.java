@@ -1,7 +1,7 @@
 package ma.abid.eductionPlatform.services.user;
 
-import ma.abid.eductionPlatform.dto.GetUserDto;
-import ma.abid.eductionPlatform.dto.PostPutUserDto;
+import ma.abid.eductionPlatform.dto.user.GetUserDto;
+import ma.abid.eductionPlatform.dto.user.PostPutUserDto;
 import ma.abid.eductionPlatform.exception.DuplicateResourceException;
 import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
 

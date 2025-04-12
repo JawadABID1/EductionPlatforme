@@ -1,9 +1,11 @@
 package ma.abid.eductionPlatform.web;
 
 
-import ma.abid.eductionPlatform.dto.CourseFileDto;
-import ma.abid.eductionPlatform.dto.CourseFileUploadRequest;
+import ma.abid.eductionPlatform.dto.courseFile.CourseFileDownloadResponse;
+import ma.abid.eductionPlatform.dto.courseFile.CourseFileDto;
+import ma.abid.eductionPlatform.dto.courseFile.CourseFileUploadRequest;
 import ma.abid.eductionPlatform.services.courseFile.CourseFileService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,9 +42,14 @@ public class CourseFileController {
         return ResponseEntity.ok(service.getFilesByCourseId(courseId));
     }
 
-    @GetMapping("/download/{fileId}")
+    @GetMapping("/files/{fileId}/download")
     public ResponseEntity<byte[]> downloadFile(@PathVariable Long fileId){
-        return ResponseEntity.ok(service.downloadFile(fileId));
+        CourseFileDownloadResponse response = service.downloadFile(fileId);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(response.getContentType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + response.getFileName() + "\"")
+                .body(response.getFileBytes());
     }
 
     @DeleteMapping("/delete/{fileId}")

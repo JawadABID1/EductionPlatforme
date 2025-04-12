@@ -1,12 +1,12 @@
 package ma.abid.eductionPlatform.services.user;
 
-import ma.abid.eductionPlatform.dto.GetUserDto;
-import ma.abid.eductionPlatform.dto.PostPutUserDto;
-import ma.abid.eductionPlatform.entities.User;
+import ma.abid.eductionPlatform.dto.user.GetUserDto;
+import ma.abid.eductionPlatform.dto.user.PostPutUserDto;
+import ma.abid.eductionPlatform.entities.user.User;
 import ma.abid.eductionPlatform.exception.DuplicateResourceException;
 import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
-import ma.abid.eductionPlatform.mapper.GetUserMapper;
-import ma.abid.eductionPlatform.mapper.PostPutUserMapper;
+import ma.abid.eductionPlatform.mapper.user.GetUserMapper;
+import ma.abid.eductionPlatform.mapper.user.PostPutUserMapper;
 import ma.abid.eductionPlatform.repository.UserRepository;
 
 import java.util.List;
