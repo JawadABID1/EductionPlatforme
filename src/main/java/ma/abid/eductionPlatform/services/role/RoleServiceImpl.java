@@ -1,11 +1,11 @@
-package ma.abid.eductionPlatforme.services.role;
+package ma.abid.eductionPlatform.services.role;
 
-import ma.abid.eductionPlatforme.dto.RoleDto;
-import ma.abid.eductionPlatforme.entities.Role;
-import ma.abid.eductionPlatforme.exception.DuplicateResourceException;
-import ma.abid.eductionPlatforme.exception.ResourceNotFoundException;
-import ma.abid.eductionPlatforme.mapper.RoleMapper;
-import ma.abid.eductionPlatforme.repository.RoleRepository;
+import ma.abid.eductionPlatform.dto.RoleDto;
+import ma.abid.eductionPlatform.entities.Role;
+import ma.abid.eductionPlatform.exception.DuplicateResourceException;
+import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
+import ma.abid.eductionPlatform.mapper.RoleMapper;
+import ma.abid.eductionPlatform.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

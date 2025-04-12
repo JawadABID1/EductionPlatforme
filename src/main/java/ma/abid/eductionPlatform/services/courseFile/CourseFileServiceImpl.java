@@ -1,15 +1,15 @@
-package ma.abid.eductionPlatforme.services.courseFile;
+package ma.abid.eductionPlatform.services.courseFile;
 
 import lombok.RequiredArgsConstructor;
-import ma.abid.eductionPlatforme.dto.CourseFileDto;
-import ma.abid.eductionPlatforme.entities.*;
-import ma.abid.eductionPlatforme.exception.DuplicateResourceException;
-import ma.abid.eductionPlatforme.exception.ResourceNotFoundException;
-import ma.abid.eductionPlatforme.mapper.CourseFileMapper;
-import ma.abid.eductionPlatforme.repository.CourseFileRepository;
-import ma.abid.eductionPlatforme.repository.CourseRepository;
-import ma.abid.eductionPlatforme.services.courseFile.strategy.Strategy;
-import ma.abid.eductionPlatforme.services.courseFile.strategy.StrategyFactory;
+import ma.abid.eductionPlatform.dto.CourseFileDto;
+import ma.abid.eductionPlatform.entities.*;
+import ma.abid.eductionPlatform.exception.DuplicateResourceException;
+import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
+import ma.abid.eductionPlatform.mapper.CourseFileMapper;
+import ma.abid.eductionPlatform.repository.CourseFileRepository;
+import ma.abid.eductionPlatform.repository.CourseRepository;
+import ma.abid.eductionPlatform.services.courseFile.uploadStrategy.Strategy;
+import ma.abid.eductionPlatform.services.courseFile.uploadStrategy.StrategyFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,7 +1,7 @@
-package ma.abid.eductionPlatforme.services.courseFile;
+package ma.abid.eductionPlatform.services.courseFile;
 
-import ma.abid.eductionPlatforme.dto.CourseFileDto;
-import ma.abid.eductionPlatforme.exception.ResourceNotFoundException;
+import ma.abid.eductionPlatform.dto.CourseFileDto;
+import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.InvocationTargetException;

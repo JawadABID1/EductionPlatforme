@@ -1,9 +1,7 @@
-package ma.abid.eductionPlatforme.entities;
+package ma.abid.eductionPlatform.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Entity @AllArgsConstructor @NoArgsConstructor @Getter @Setter @Builder
 public class Role {

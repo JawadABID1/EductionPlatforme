@@ -1,8 +1,7 @@
-package ma.abid.eductionPlatforme.mapper;
+package ma.abid.eductionPlatform.mapper;
 
-import ma.abid.eductionPlatforme.dto.CourseDto;
-import ma.abid.eductionPlatforme.dto.CourseFileDto;
-import ma.abid.eductionPlatforme.entities.CourseFile;
+import ma.abid.eductionPlatform.dto.CourseFileDto;
+import ma.abid.eductionPlatform.entities.CourseFile;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

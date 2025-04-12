@@ -1,6 +1,6 @@
-package ma.abid.eductionPlatforme.repository;
+package ma.abid.eductionPlatform.repository;
 
-import ma.abid.eductionPlatforme.entities.CourseFile;
+import ma.abid.eductionPlatform.entities.CourseFile;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

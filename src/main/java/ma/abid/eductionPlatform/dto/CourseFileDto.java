@@ -1,8 +1,7 @@
-package ma.abid.eductionPlatforme.dto;
+package ma.abid.eductionPlatform.dto;
 
 import lombok.*;
-import ma.abid.eductionPlatforme.entities.Course;
-import ma.abid.eductionPlatforme.enumm.FileType;
+import ma.abid.eductionPlatform.entities.Course;
 
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter @Builder
 public class CourseFileDto {

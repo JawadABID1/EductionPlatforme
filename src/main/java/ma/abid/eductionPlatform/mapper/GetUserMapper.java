@@ -1,9 +1,8 @@
-package ma.abid.eductionPlatforme.mapper;
+package ma.abid.eductionPlatform.mapper;
 
-import ma.abid.eductionPlatforme.dto.GetUserDto;
-import ma.abid.eductionPlatforme.entities.User;
+import ma.abid.eductionPlatform.dto.GetUserDto;
+import ma.abid.eductionPlatform.entities.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface GetUserMapper{

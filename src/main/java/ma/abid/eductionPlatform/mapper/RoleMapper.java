@@ -1,7 +1,7 @@
-package ma.abid.eductionPlatforme.mapper;
+package ma.abid.eductionPlatform.mapper;
 
-import ma.abid.eductionPlatforme.dto.RoleDto;
-import ma.abid.eductionPlatforme.entities.Role;
+import ma.abid.eductionPlatform.dto.RoleDto;
+import ma.abid.eductionPlatform.entities.Role;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

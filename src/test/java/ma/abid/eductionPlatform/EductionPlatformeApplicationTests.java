@@ -1,4 +1,4 @@
-package ma.abid.eductionPlatforme;
+package ma.abid.eductionPlatform;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

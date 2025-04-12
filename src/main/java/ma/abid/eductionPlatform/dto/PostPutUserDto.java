@@ -1,7 +1,7 @@
-package ma.abid.eductionPlatforme.dto;
+package ma.abid.eductionPlatform.dto;
 
 import lombok.*;
-import ma.abid.eductionPlatforme.entities.Role;
+import ma.abid.eductionPlatform.entities.Role;
 
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter @Builder
 public class PostPutUserDto {

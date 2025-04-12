@@ -1,7 +1,7 @@
-package ma.abid.eductionPlatforme.mapper;
+package ma.abid.eductionPlatform.mapper;
 
-import ma.abid.eductionPlatforme.dto.PostPutUserDto;
-import ma.abid.eductionPlatforme.entities.User;
+import ma.abid.eductionPlatform.dto.PostPutUserDto;
+import ma.abid.eductionPlatform.entities.User;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

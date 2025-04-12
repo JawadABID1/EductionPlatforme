@@ -1,6 +1,6 @@
-package ma.abid.eductionPlatforme.repository;
+package ma.abid.eductionPlatform.repository;
 
-import ma.abid.eductionPlatforme.entities.User;
+import ma.abid.eductionPlatform.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

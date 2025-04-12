@@ -1,7 +1,7 @@
-package ma.abid.eductionPlatforme.dto;
+package ma.abid.eductionPlatform.dto;
 
 import lombok.*;
-import ma.abid.eductionPlatforme.entities.User;
+import ma.abid.eductionPlatform.entities.User;
 
 
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter @Builder

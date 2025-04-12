@@ -1,7 +1,7 @@
-package ma.abid.eductionPlatforme.web;
+package ma.abid.eductionPlatform.web;
 
-import ma.abid.eductionPlatforme.dto.CourseDto;
-import ma.abid.eductionPlatforme.services.course.CourseService;
+import ma.abid.eductionPlatform.dto.CourseDto;
+import ma.abid.eductionPlatform.services.course.CourseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package ma.abid.eductionPlatforme.dto;
+package ma.abid.eductionPlatform.dto;
 
 import lombok.*;
 

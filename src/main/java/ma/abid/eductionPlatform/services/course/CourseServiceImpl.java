@@ -1,11 +1,11 @@
-package ma.abid.eductionPlatforme.services.course;
+package ma.abid.eductionPlatform.services.course;
 
-import ma.abid.eductionPlatforme.dto.CourseDto;
-import ma.abid.eductionPlatforme.entities.Course;
-import ma.abid.eductionPlatforme.exception.DuplicateResourceException;
-import ma.abid.eductionPlatforme.exception.ResourceNotFoundException;
-import ma.abid.eductionPlatforme.mapper.CourseMapper;
-import ma.abid.eductionPlatforme.repository.CourseRepository;
+import ma.abid.eductionPlatform.dto.CourseDto;
+import ma.abid.eductionPlatform.entities.Course;
+import ma.abid.eductionPlatform.exception.DuplicateResourceException;
+import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
+import ma.abid.eductionPlatform.mapper.CourseMapper;
+import ma.abid.eductionPlatform.repository.CourseRepository;
 
 
 import java.util.List;

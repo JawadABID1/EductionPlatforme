@@ -1,8 +1,8 @@
-package ma.abid.eductionPlatforme.services.courseFile.strategy;
+package ma.abid.eductionPlatform.services.courseFile.uploadStrategy;
 
-import ma.abid.eductionPlatforme.entities.Course;
-import ma.abid.eductionPlatforme.entities.CourseFile;
-import ma.abid.eductionPlatforme.entities.Pdf;
+import ma.abid.eductionPlatform.entities.Course;
+import ma.abid.eductionPlatform.entities.CourseFile;
+import ma.abid.eductionPlatform.entities.Pdf;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Path;

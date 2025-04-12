@@ -1,4 +1,4 @@
-package ma.abid.eductionPlatforme.config;
+package ma.abid.eductionPlatform.config;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;

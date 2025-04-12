@@ -1,14 +1,13 @@
-package ma.abid.eductionPlatforme.web;
+package ma.abid.eductionPlatform.web;
 
 
-import ma.abid.eductionPlatforme.dto.CourseFileDto;
-import ma.abid.eductionPlatforme.dto.CourseFileUploadRequest;
-import ma.abid.eductionPlatforme.services.courseFile.CourseFileService;
+import ma.abid.eductionPlatform.dto.CourseFileDto;
+import ma.abid.eductionPlatform.dto.CourseFileUploadRequest;
+import ma.abid.eductionPlatform.services.courseFile.CourseFileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;

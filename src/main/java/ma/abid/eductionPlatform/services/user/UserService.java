@@ -1,9 +1,9 @@
-package ma.abid.eductionPlatforme.services.user;
+package ma.abid.eductionPlatform.services.user;
 
-import ma.abid.eductionPlatforme.dto.GetUserDto;
-import ma.abid.eductionPlatforme.dto.PostPutUserDto;
-import ma.abid.eductionPlatforme.exception.DuplicateResourceException;
-import ma.abid.eductionPlatforme.exception.ResourceNotFoundException;
+import ma.abid.eductionPlatform.dto.GetUserDto;
+import ma.abid.eductionPlatform.dto.PostPutUserDto;
+import ma.abid.eductionPlatform.exception.DuplicateResourceException;
+import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
 
 import java.util.List;
 

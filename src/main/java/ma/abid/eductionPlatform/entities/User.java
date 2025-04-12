@@ -1,4 +1,4 @@
-package ma.abid.eductionPlatforme.entities;
+package ma.abid.eductionPlatform.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

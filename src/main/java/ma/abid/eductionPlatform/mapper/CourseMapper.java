@@ -1,9 +1,8 @@
-package ma.abid.eductionPlatforme.mapper;
+package ma.abid.eductionPlatform.mapper;
 
-import ma.abid.eductionPlatforme.dto.CourseDto;
-import ma.abid.eductionPlatforme.entities.Course;
+import ma.abid.eductionPlatform.dto.CourseDto;
+import ma.abid.eductionPlatform.entities.Course;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Service;
 
 @Mapper(componentModel = "spring")
 public interface CourseMapper {

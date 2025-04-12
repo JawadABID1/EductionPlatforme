@@ -1,9 +1,8 @@
-package ma.abid.eductionPlatforme.web;
+package ma.abid.eductionPlatform.web;
 
-import ma.abid.eductionPlatforme.dto.GetUserDto;
-import ma.abid.eductionPlatforme.dto.PostPutUserDto;
-import ma.abid.eductionPlatforme.entities.User;
-import ma.abid.eductionPlatforme.services.user.UserService;
+import ma.abid.eductionPlatform.dto.GetUserDto;
+import ma.abid.eductionPlatform.dto.PostPutUserDto;
+import ma.abid.eductionPlatform.services.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

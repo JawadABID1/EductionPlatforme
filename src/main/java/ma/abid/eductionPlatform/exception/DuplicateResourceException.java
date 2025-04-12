@@ -1,4 +1,4 @@
-package ma.abid.eductionPlatforme.exception;
+package ma.abid.eductionPlatform.exception;
 
 public class DuplicateResourceException extends RuntimeException{
 

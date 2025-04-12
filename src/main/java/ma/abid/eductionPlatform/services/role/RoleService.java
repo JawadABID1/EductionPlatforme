@@ -1,8 +1,8 @@
-package ma.abid.eductionPlatforme.services.role;
+package ma.abid.eductionPlatform.services.role;
 
-import ma.abid.eductionPlatforme.dto.RoleDto;
-import ma.abid.eductionPlatforme.exception.DuplicateResourceException;
-import ma.abid.eductionPlatforme.exception.ResourceNotFoundException;
+import ma.abid.eductionPlatform.dto.RoleDto;
+import ma.abid.eductionPlatform.exception.DuplicateResourceException;
+import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
 
 import java.util.List;
 

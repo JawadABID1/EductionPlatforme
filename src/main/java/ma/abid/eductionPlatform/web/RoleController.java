@@ -1,7 +1,7 @@
-package ma.abid.eductionPlatforme.web;
+package ma.abid.eductionPlatform.web;
 
-import ma.abid.eductionPlatforme.dto.RoleDto;
-import ma.abid.eductionPlatforme.services.role.RoleService;
+import ma.abid.eductionPlatform.dto.RoleDto;
+import ma.abid.eductionPlatform.services.role.RoleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

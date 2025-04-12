@@ -1,4 +1,4 @@
-package ma.abid.eductionPlatforme.services.courseFile.strategy;
+package ma.abid.eductionPlatform.services.courseFile.uploadStrategy;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class StrategyFactory {
 
         Strategy strategy = strategies.get(key);
         if (strategy == null) {
-            throw new IllegalArgumentException("No strategy found for extension: " + extension);
+            throw new IllegalArgumentException("No uploadStrategy found for extension: " + extension);
         }
         return strategy;
     }
