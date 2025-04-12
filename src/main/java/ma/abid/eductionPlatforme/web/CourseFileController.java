@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class CourseFileController {
     @PostMapping(value = "/upload/{courseId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<CourseFileDto> uploadFile(
             @PathVariable Long courseId,
-            @ModelAttribute CourseFileUploadRequest request) {
+            @ModelAttribute CourseFileUploadRequest request) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 service.uploadFile(courseId, request.getFile()));
     }

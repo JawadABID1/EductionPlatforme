@@ -1,5 +1,6 @@
 package ma.abid.eductionPlatforme.services.courseFile;
 
+import lombok.RequiredArgsConstructor;
 import ma.abid.eductionPlatforme.dto.CourseFileDto;
 import ma.abid.eductionPlatforme.entities.*;
 import ma.abid.eductionPlatforme.exception.DuplicateResourceException;
@@ -7,10 +8,13 @@ import ma.abid.eductionPlatforme.exception.ResourceNotFoundException;
 import ma.abid.eductionPlatforme.mapper.CourseFileMapper;
 import ma.abid.eductionPlatforme.repository.CourseFileRepository;
 import ma.abid.eductionPlatforme.repository.CourseRepository;
+import ma.abid.eductionPlatforme.services.courseFile.strategy.Strategy;
+import ma.abid.eductionPlatforme.services.courseFile.strategy.StrategyFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,30 +22,24 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CourseFileServiceImpl implements CourseFileService {
 
     private final CourseFileRepository courseFileRepository;
     private final CourseFileMapper courseFileMapper;
     private final CourseRepository courseRepository;
+    private final StrategyFactory strategyFactory;
 
     private static final String UPLOAD_DIR = "uploads/";
 
-    public CourseFileServiceImpl(CourseFileRepository courseFileRepository,
-                                 CourseFileMapper courseFileMapper,
-                                 CourseRepository courseRepository) {
-        this.courseFileRepository = courseFileRepository;
-        this.courseFileMapper = courseFileMapper;
-        this.courseRepository = courseRepository;
-    }
-
     @Override
-    public CourseFileDto uploadFile(Long courseId, MultipartFile file) throws ResourceNotFoundException {
+    public CourseFileDto uploadFile(Long courseId, MultipartFile file) throws ResourceNotFoundException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() -> new ResourceNotFoundException("Course not found"));
 
         String originalFilename = file.getOriginalFilename();
         Optional<CourseFile> byFileName = courseFileRepository.findByFileName(originalFilename);
-        if (byFileName.isPresent()) throw new  DuplicateResourceException("A other file exists with same name: "+originalFilename);
+        if (byFileName.isPresent()) throw new  DuplicateResourceException("A file with the same name already exists: " + originalFilename);
         String extension = getFileExtension(originalFilename);
 
 
@@ -55,35 +53,10 @@ public class CourseFileServiceImpl implements CourseFileService {
             throw new RuntimeException("Failed to save file: " + e.getMessage(), e);
         }
 
-        // 2. Créer l'entité appropriée
-        CourseFile courseFile;
-        if ("pdf".equalsIgnoreCase(extension)) {
-            courseFile = Pdf.builder()
-                    .fileName(originalFilename)
-                    .filePath(path.toString())
-                    .course(course)
-                    .fileType("PDF")
-                    .author("Inconnu")
-                    .pageCount(0)     // à ajuster si parsé
-                    .build();
-        } else if ("mp4".equalsIgnoreCase(extension)) {
-            courseFile = Video.builder()
-                    .fileName(originalFilename)
-                    .filePath(path.toString())
-                    .course(course)
-                    .videoUrl(path.toString()) // ou URL externe
-                    .duration(0)               // à ajuster si parsé
-                    .build();
-        } else {
-            throw new IllegalArgumentException("Unsupported file type: " + extension);
-        }
-
-        // 3. Enregistrer dans la base
-        System.out.println("____________________________________start__________________");
-        System.out.println("courseFile: " + courseFile.toString());
-        System.out.println("____________________________________end___________________");
-        courseFileRepository.save(courseFile);
-        return courseFileMapper.toDto(courseFile);
+        Strategy strategy = strategyFactory.getStrategy(extension);
+        CourseFile fileType = strategy.treatFileType(originalFilename, course, path);
+        courseFileRepository.save(fileType);
+        return courseFileMapper.toDto(fileType);
     }
 
     @Override
@@ -136,4 +109,5 @@ public class CourseFileServiceImpl implements CourseFileService {
         }
         return fileName.substring(fileName.lastIndexOf('.') + 1);
     }
+
 }
