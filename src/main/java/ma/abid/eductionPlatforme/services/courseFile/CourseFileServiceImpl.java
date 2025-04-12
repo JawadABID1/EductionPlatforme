@@ -42,10 +42,8 @@ public class CourseFileServiceImpl implements CourseFileService {
         if (byFileName.isPresent()) throw new  DuplicateResourceException("A file with the same name already exists: " + originalFilename);
         String extension = getFileExtension(originalFilename);
 
-
-
-        // 1. Sauvegarder le fichier sur le disque
-        Path path = Paths.get(UPLOAD_DIR + originalFilename);
+//        Path path = Paths.get(UPLOAD_DIR + originalFilename);
+        Path path = Path.of(UPLOAD_DIR+originalFilename);
         try {
             Files.createDirectories(path.getParent());
             Files.write(path, file.getBytes());

@@ -10,9 +10,9 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("MS Syndic Craft Backend API")
+                        .title("Education Platform  Backend API")
                         .version("1.0")
-                        .description("API documentation for the MS Syndic Craft Backend")
+                        .description("API documentation for the Eduction Platform Backend")
                         );
     }
 }
