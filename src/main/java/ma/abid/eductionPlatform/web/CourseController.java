@@ -33,16 +33,19 @@ public class CourseController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_PROF')")
     public ResponseEntity<CourseDto> createNewCourse(@RequestBody CourseDto courseDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createNewCourse(courseDto));
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_PROF')")
     public ResponseEntity<CourseDto> updateCourse(@PathVariable Long id, @RequestBody CourseDto courseDto){
         return ResponseEntity.ok(service.updateCourse(id, courseDto));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_PROF')")
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id){
         service.deleteCourse(id);

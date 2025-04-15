@@ -6,6 +6,7 @@ import ma.abid.eductionPlatform.services.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class UserController {
         this.service = service;
     }
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_PROF')")
     public ResponseEntity<List<GetUserDto>> getAllUsers(){
         List<GetUserDto> allUsers = service.getAllUsers();
         return ResponseEntity.ok(allUsers);
@@ -36,10 +38,12 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_PROF')")
     public ResponseEntity<GetUserDto> updateUser(@PathVariable Long id, @RequestBody PostPutUserDto putUserDto){
         return ResponseEntity.ok(service.updateUser(id, putUserDto));
     }
 
+    @PreAuthorize("hasAuthority('ROLE_PROF')")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         service.deleteUser(id);
         return ResponseEntity.noContent().build();
