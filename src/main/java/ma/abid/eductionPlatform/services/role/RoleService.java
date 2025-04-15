@@ -8,10 +8,9 @@ import java.util.List;
 
 public interface RoleService {
     List<RoleDto> getAllRoles();
-    RoleDto getRoleById(Long id) throws ResourceNotFoundException;
+    RoleDto getRoleByNom(String nom) throws ResourceNotFoundException;
     RoleDto createNewRole(RoleDto roleDto) throws DuplicateResourceException;
     RoleDto updateRole(Long id, RoleDto roleDto) throws ResourceNotFoundException;
-    void deleteRoleById(Long id) throws ResourceNotFoundException;
-    RoleDto getRoleByNom(String nom) throws ResourceNotFoundException;
+    void deleteRoleByNom(Long id) throws ResourceNotFoundException;
 
 }

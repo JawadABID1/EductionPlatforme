@@ -5,6 +5,7 @@ import ma.abid.eductionPlatform.dto.user.PostPutUserDto;
 import ma.abid.eductionPlatform.services.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,18 +23,14 @@ public class UserController {
         return ResponseEntity.ok(allUsers);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<GetUserDto>> getSearchedUser(@RequestParam String key){
-        List<GetUserDto> searchedUser = service.getSearchedUser(key);
-        return ResponseEntity.ok(searchedUser);
-    }
-
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_PROF')")
     public ResponseEntity<GetUserDto> getUserById(Long id){
         return ResponseEntity.ok(service.getUserById(id));
     }
 
     @PostMapping
+//    @PreAuthorize("hasAuthority('ROLE_PROF')")
     public ResponseEntity<GetUserDto> createNewUser(@RequestBody PostPutUserDto postUserDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createNewUser(postUserDto));
     }

@@ -29,16 +29,9 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleDto getRoleById(Long id) throws ResourceNotFoundException {
-        Optional<Role> user = roleRepository.findById(id);
-        if (user.isEmpty()) throw new ResourceNotFoundException("role not found");
-        return roleMapper.toDto(user.get());
-    }
-
-    @Override
     public RoleDto createNewRole(RoleDto roleDto) throws DuplicateResourceException {
-          Optional<Role> byNom = roleRepository.findByNom(roleDto.getNom());
-          if (byNom.isPresent()) throw new DuplicateResourceException("A role already exists with same nom");
+          Optional<Role> role = roleRepository.findByRole(roleDto.getRole());
+          if (role.isPresent()) throw new DuplicateResourceException("A role already exists with same nom");
           Role roleToCreate = roleMapper.toEntity(roleDto);
           return roleMapper.toDto(roleRepository.save(roleToCreate));
     }
@@ -46,12 +39,12 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public RoleDto updateRole(Long id, RoleDto roleDto) throws ResourceNotFoundException {
         Role roleToUpdate = roleRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Role not found"));
-        roleToUpdate.setNom(roleDto.getNom());
+        roleToUpdate.setRole(roleDto.getRole());
         return roleMapper.toDto(roleRepository.save(roleToUpdate));
     }
 
     @Override
-    public void deleteRoleById(Long id) throws ResourceNotFoundException {
+    public void deleteRoleByNom(Long id) throws ResourceNotFoundException {
         Optional<Role> roleToDelete = roleRepository.findById(id);
         if (roleToDelete.isEmpty()) throw new  ResourceNotFoundException("Role not found");
         roleRepository.deleteById(id);
@@ -59,7 +52,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDto getRoleByNom(String nom) throws ResourceNotFoundException {
-        Role byNom = roleRepository.findByNom(nom).orElseThrow(()-> new ResourceNotFoundException("Role not found"));
+        Role byNom = roleRepository.findByRole(nom).orElseThrow(()-> new ResourceNotFoundException("Role not found"));
         return roleMapper.toDto(byNom);
     }
 }

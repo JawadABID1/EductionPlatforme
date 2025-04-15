@@ -2,12 +2,13 @@ package ma.abid.eductionPlatform.services.user;
 
 import ma.abid.eductionPlatform.dto.user.GetUserDto;
 import ma.abid.eductionPlatform.dto.user.PostPutUserDto;
-import ma.abid.eductionPlatform.entities.user.User;
+import ma.abid.eductionPlatform.entities.user.AppUser;
 import ma.abid.eductionPlatform.exception.DuplicateResourceException;
 import ma.abid.eductionPlatform.exception.ResourceNotFoundException;
 import ma.abid.eductionPlatform.mapper.user.GetUserMapper;
 import ma.abid.eductionPlatform.mapper.user.PostPutUserMapper;
 import ma.abid.eductionPlatform.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,52 +18,52 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PostPutUserMapper postPutUserMapper;
     private final GetUserMapper getUserMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, PostPutUserMapper postPutUserMapper, GetUserMapper getUserMapper) {
+    public UserServiceImpl(UserRepository userRepository, PostPutUserMapper postPutUserMapper, GetUserMapper getUserMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.postPutUserMapper = postPutUserMapper;
         this.getUserMapper = getUserMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public List<GetUserDto> getAllUsers() {
-        List<User> userList = userRepository.findAll();
-        return userList.stream().map(getUserMapper::toDto).toList();
-    }
-
-    @Override
-    public List<GetUserDto> getSearchedUser(String key) {
-        List<User> userList = userRepository.findByUsernameContainsIgnoreCase(key);
-        return userList.stream().map(getUserMapper::toDto).toList();
+        List<AppUser> appUserList = userRepository.findAll();
+        return appUserList.stream().map(getUserMapper::toDto).toList();
     }
 
     @Override
     public GetUserDto getUserById(Long id) throws ResourceNotFoundException {
-        User user = userRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("User not found"));
-        return getUserMapper.toDto(user);
+        AppUser appUser = userRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("AppUser not found"));
+        return getUserMapper.toDto(appUser);
+    }
+
+    @Override
+    public GetUserDto getUserByUserName(String username) {
+        Optional<AppUser> userByUsername = userRepository.findByUsername(username);
+        if (userByUsername.isEmpty()) throw new ResourceNotFoundException("AppUser not found");
+        return getUserMapper.toDto(userByUsername.get());
     }
 
     @Override
     public GetUserDto createNewUser(PostPutUserDto postPutUserDtoToCreating) throws DuplicateResourceException {
-//        User user = userRepository.findByEmail(postPutUserDtoToCreating.getEmail())
-//                .orElseThrow(()-> new DuplicateResourceException("A user already exists with same email: "
-//                        + postPutUserDtoToCreating.getEmail()));
-        Optional<User> userByEmail = userRepository.findByEmail(postPutUserDtoToCreating.getEmail());
+        Optional<AppUser> userByEmail = userRepository.findByEmail(postPutUserDtoToCreating.getEmail());
         if (userByEmail.isPresent()) throw new DuplicateResourceException("A user already exists with same email: " + postPutUserDtoToCreating.getEmail());
-
-        return getUserMapper.toDto(userRepository.save(postPutUserMapper.toEntity(postPutUserDtoToCreating)));
+        AppUser userEntity = postPutUserMapper.toEntity(postPutUserDtoToCreating);
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        return getUserMapper.toDto(userRepository.save(userEntity));
     }
 
     @Override
     public GetUserDto updateUser(Long id, PostPutUserDto postPutUserDtoToCreating) throws ResourceNotFoundException {
-        User user = userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("User not found"));
-        user.setFirstName(postPutUserDtoToCreating.getFirstName());
-        user.setLastName(postPutUserDtoToCreating.getLastName());
-        user.setUsername(postPutUserDtoToCreating.getUsername());
-        user.setEmail(postPutUserDtoToCreating.getEmail());
-        user.setRole(postPutUserDtoToCreating.getRole());
-        return getUserMapper.toDto(userRepository.save(user));
+        AppUser appUser = userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("AppUser not found"));
+        appUser.setFirstName(postPutUserDtoToCreating.getFirstName());
+        appUser.setLastName(postPutUserDtoToCreating.getLastName());
+        appUser.setUsername(postPutUserDtoToCreating.getUsername());
+        appUser.setEmail(postPutUserDtoToCreating.getEmail());
+        return getUserMapper.toDto(userRepository.save(appUser));
     }
 
     @Override

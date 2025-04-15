@@ -2,7 +2,7 @@ package ma.abid.eductionPlatform.entities.course;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ma.abid.eductionPlatform.entities.user.User;
+import ma.abid.eductionPlatform.entities.user.AppUser;
 
 @Entity @AllArgsConstructor @NoArgsConstructor @Getter @Setter @Builder
 public class Course {
@@ -15,5 +15,5 @@ public class Course {
     private String content;
     @ManyToOne
     @JoinColumn(name = "userId")
-    private User createdBy;
+    private AppUser createdBy;
 }

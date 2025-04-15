@@ -23,11 +23,6 @@ public class RoleController {
         return ResponseEntity.ok(service.getAllRoles());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RoleDto> getRoleById(@PathVariable Long id){
-        return ResponseEntity.ok(service.getRoleById(id));
-    }
-
     @PostMapping
     public ResponseEntity<RoleDto> createNewRole(@RequestBody RoleDto roleDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createNewRole(roleDto));
@@ -45,7 +40,7 @@ public class RoleController {
 
     @DeleteMapping
     public ResponseEntity<Void> deleteRoleById(@PathVariable Long id){
-        service.deleteRoleById(id);
+        service.deleteRoleByNom(id);
         return ResponseEntity.noContent().build();
     }
 }
